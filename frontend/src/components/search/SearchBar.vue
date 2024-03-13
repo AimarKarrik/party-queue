@@ -1,20 +1,23 @@
-<script setup></script>
+<script setup>
+const sus = window.location.host
+</script>
 
 <template>
   <input type="text" v-model="search" placeholder="Search" />
   <button @click="handleSearch">Search</button>
+  <h1>{{ sus }}</h1>
   <div v-if="searchResults">
     <h2>Search Results</h2>
     <ul>
-      <li v-for="result in searchResults" :key="result.id">
-        {{ result.name }}
+      <li v-for="item in items" :key="result.id">
+        {{ item.name }}
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+//import { getToken } from '@/helpers/AuthHelper'
 
 export default {
   data() {
@@ -29,10 +32,11 @@ export default {
     async handleSearch() {
       try {
         const response = await fetch(
-          `https://api.spotify.com/v1/search?q=${s}&type=track&offset=0`,
+          `https://api.spotify.com/v1/search?q=run!&type=track&offset=0`,
           {
+            method: 'GET',
             headers: {
-              Authorization: `Bearer ${this.accessToken}`
+              Authorization: `Bearer BQBOz3qtiirjblQD14UtB6Hof4evCm2FAttKsHabXlogb49hS0W9SUt2zJosl43vehONxjYkHj0e_lHO9f8CfKiqx7szp6QXE3SoIhovlMUT1ahKs4M`
             }
           }
         )
@@ -40,7 +44,8 @@ export default {
           throw new Error('Failed to fetch items')
         }
         const data = await response.json()
-        this.items = data
+        console.log(data)
+        this.items = data.items
       } catch (error) {
         console.error('Error fetching items:', error)
       }
