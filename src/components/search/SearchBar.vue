@@ -2,7 +2,7 @@
 
 <template>
   <input type="text" v-model="search" placeholder="Search" />
-  <button @click="search">Search</button>
+  <button @click="handleSearch">Search</button>
   <div v-if="searchResults">
     <h2>Search Results</h2>
     <ul>
@@ -28,7 +28,14 @@ export default {
   methods: {
     async handleSearch() {
       try {
-        const response = await fetch('https://api.example.com/items')
+        const response = await fetch(
+          `https://api.spotify.com/v1/search?q=${s}&type=track&offset=0`,
+          {
+            headers: {
+              Authorization: `Bearer ${this.accessToken}`
+            }
+          }
+        )
         if (!response.ok) {
           throw new Error('Failed to fetch items')
         }
