@@ -4,3 +4,5 @@
   <input type="text" placeholder="Search" />
   <button>Search</button>
 </template>
+
+<script></script>

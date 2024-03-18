@@ -1,12 +1,12 @@
-<script setup>
-const location = window.location.host
-</script>
+<script setup></script>
 
 <template>
   <div class="queue-list">
     <h2>Queue List</h2>
     <ul>
-      <li>{{ currentlyPlaying.value }} - {{ currentlyPlaying.artist }}</li>
+      <li>
+        {{ currentlyPlaying.value.name }} - {{ getAllArtists(currentlyPlaying.value.artists) }}
+      </li>
       <li v-for="song in queue" :key="song.id">
         {{ song.name }} - {{ getAllArtists(song.artists) }}
       </li>
@@ -32,10 +32,8 @@ export default {
     async getQueue() {
       try {
         const response = await spotify.player.getUsersQueue()
-        //this.currentlyPlaying.push(response.currently_playing)
+        this.currentlyPlaying.value = response.currently_playing
         this.queue.push(...response.queue)
-        console.log(response.currently_playing)
-        console.log(this.currentlyPlaying)
       } catch (error) {
         console.error('Error getting queue:', error)
       }
