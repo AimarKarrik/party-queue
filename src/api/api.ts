@@ -12,5 +12,4 @@ const implicitGrantStrategy = new AuthorizationCodeWithPKCEStrategy(
 )
 
 const spotify = new SpotifyApi(implicitGrantStrategy)
-
 export default spotify
