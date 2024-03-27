@@ -1,8 +1,8 @@
 import { SpotifyApi, AuthorizationCodeWithPKCEStrategy } from '@spotify/web-api-ts-sdk'
 
-const implicitGrantStrategy = new AuthorizationCodeWithPKCEStrategy(
+const auth = new AuthorizationCodeWithPKCEStrategy(
     'a8db7a861337459eb17dc0bcaa86f671',
-    window.location.host,
+    'http://localhost:5173',
     [
         'user-read-private',
         'user-read-email',
@@ -11,5 +11,5 @@ const implicitGrantStrategy = new AuthorizationCodeWithPKCEStrategy(
     ]
 )
 
-const spotify = new SpotifyApi(implicitGrantStrategy)
+const spotify = new SpotifyApi(auth)
 export default spotify

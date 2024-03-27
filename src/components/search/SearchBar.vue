@@ -16,6 +16,7 @@ import { getAllArtists } from '@/helpers/artistHelper'
 
 <script>
 export default {
+  emits: ['added-to-queue'],
   data() {
     return {
       searchQuery: '',
@@ -35,8 +36,9 @@ export default {
     async addToQueue(song) {
       try {
         const response = await spotify.player.addItemToPlaybackQueue(song.uri)
+        this.$emit('added-to-queue')
       } catch (error) {
-        console.error('Error adding to queue:', error) 
+        console.error('Error adding to queue:', error)
       }
     }
   }
