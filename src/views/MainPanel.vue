@@ -29,6 +29,7 @@ export default {
       try {
         const response = await spotify.player.getUsersQueue()
         this.currentlyPlaying.value = response.currently_playing
+        this.queue.splice(0, this.queue.length)
         this.queue.push(...response.queue)
         console.log('Queue:', this.queue)
       } catch (error) {
