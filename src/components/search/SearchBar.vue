@@ -5,7 +5,7 @@ import { getAllArtists } from '@/helpers/artistHelper'
 </script>
 
 <template>
-  <input type="text" placeholder="Search" v-model="searchQuery" />
+  <input type="text" placeholder="Search" v-model="searchQuery" @keypress="handleKeypress" />
   <button @click="search">Search</button>
   <ul>
     <li v-for="song in lastSearch" :key="song.id" @click="addToQueue(song)">
@@ -31,6 +31,11 @@ export default {
         this.lastSearch.push(...response.tracks.items)
       } catch (error) {
         console.error('Error getting search result:', error)
+      }
+    },
+    handleKeypress(event) {
+      if (event.key === 'Enter') {
+        this.search()
       }
     },
     async addToQueue(song) {
