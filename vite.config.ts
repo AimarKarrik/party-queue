@@ -9,10 +9,19 @@ export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
+
   ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  server: {
+    port: 3000,
+    strictPort: true,
+    host: true,
+  },
+  ssr: {
+    noExternal: ['crypto'],
   }
 })
