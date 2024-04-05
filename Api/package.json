@@ -2,11 +2,11 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx tsc && node build/index.js"
   },
-  "author": "",
+  "author": "Aimar Karrik",
   "license": "ISC",
   "dependencies": {
     "@spotify/web-api-ts-sdk": "^1.2.0",
