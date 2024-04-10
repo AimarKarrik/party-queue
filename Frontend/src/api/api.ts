@@ -1,4 +1,6 @@
-import { SpotifyApi, AuthorizationCodeWithPKCEStrategy } from '@spotify/web-api-ts-sdk'
+import 'crypto'
+import { SpotifyApi, AuthorizationCodeWithPKCEStrategy} from '@spotify/web-api-ts-sdk'
+import type { SdkOptions } from '@spotify/web-api-ts-sdk'
 
 const auth = new AuthorizationCodeWithPKCEStrategy(
     'a8db7a861337459eb17dc0bcaa86f671',
@@ -11,5 +13,5 @@ const auth = new AuthorizationCodeWithPKCEStrategy(
     ]
 )
 
-const spotify = new SpotifyApi(auth)
+const spotify = new SpotifyApi(auth, )
 export default spotify

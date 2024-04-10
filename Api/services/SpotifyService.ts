@@ -12,4 +12,5 @@ const auth = new AuthorizationCodeWithPKCEStrategy(
 )
 
 const spotify = new SpotifyApi(auth)
+
 export default spotify

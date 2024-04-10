@@ -21,7 +21,7 @@ export default defineConfig({
     strictPort: true,
     host: true,
   },
-  ssr: {
-    noExternal: ['crypto'],
-  }
+  build: {
+    minify: false,
+  },
 })
