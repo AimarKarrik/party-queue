@@ -1,28 +1,32 @@
-<script setup></script>
+<script setup lang="ts">
+import SongItem from '@/components/songs/SongItem.vue'
+</script>
 
 <template>
     <div class="queue-list">
         <h2>Queue List</h2>
-        <ul v-if="hasQueue">
-            <li>{{ currentlyPlaying.name }} - {{}}</li>
-            <li v-for="song in queue" :key="song.id">
-                {{ song.name }} - {{ getAllArtists(song.artists) }}
-            </li>
-        </ul>
+        <div v-if="queue">
+            <SongItem
+                v-for="song in queue"
+                :key="song.id"
+                :title="song.title"
+                :channel="song.channelTitle"
+                :length="song.length.simpleText"
+                :thumbnail="song.thumbnail.thumbnails[0].url"
+            />
+        </div>
         <p v-if="!hasQueue">There is nothing in queue</p>
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import type { PropType } from 'vue'
+import type Song from '@/types/song'
+
 export default {
     props: {
         queue: {
-            type: Array,
-            default: () => []
-        },
-        currentlyPlaying: {
-            type: Object,
-            default: () => ({})
+            type: Array as PropType<Song[]>
         }
     },
     data() {
@@ -31,6 +35,9 @@ export default {
         }
     },
     updated() {
+        if (this.queue === undefined) {
+            return
+        }
         this.hasQueue = this.queue.length > 0
     }
 }
