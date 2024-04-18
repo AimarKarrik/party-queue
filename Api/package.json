@@ -9,6 +9,7 @@
   "author": "Aimar Karrik",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "youtube-search-api": "^1.2.1"
   },

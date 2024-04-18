@@ -2,15 +2,15 @@ import express from "express";
 
 const queueController = express.Router();
 
-const queue: string[] = [];
-const queueHistory: string[] = [];
+const queue: object[] = [];
+const queueHistory: object[] = [];
 
 queueController.get('/', async (req, res) => {
     res.status(200).send(queue);
 });
 
 queueController.post('/', async (req, res) => {
-    const song: string = req.body.song as string;
+    const song: object = req.body.song;
 
     if (queue.includes(song)) {
         res.status(400).send("Song already in queue");
@@ -22,7 +22,7 @@ queueController.post('/', async (req, res) => {
 });
 
 queueController.delete('/', async (req, res) => {
-    const song: string = req.body.song as string;
+    const song: object = req.body.song;
 
     if (!queue.includes(song)) {
         res.status(400).send("Song not in queue");
@@ -35,8 +35,8 @@ queueController.delete('/', async (req, res) => {
 
 
 queueController.put('/', async (req, res) => {
-    const song: string = req.body.song as string;
-    const newPosition: number = req.body.newPosition as number;
+    const song: object = req.body.song;
+    const newPosition: number = parseInt(req.query.newPosition as string);
 
     if (!queue.includes(song)) {
         res.status(400).send("Song not in queue");
@@ -55,7 +55,7 @@ queueController.put('/', async (req, res) => {
 
 // next song
 queueController.get('/next', async (req, res) => {
-    const song: string | undefined = queue.shift();
+    const song: object | undefined = queue.shift();
     if (!song) {
         res.status(400).send("No songs in queue");
         return;
@@ -66,7 +66,7 @@ queueController.get('/next', async (req, res) => {
 
 // previous song
 queueController.get('/previous', async (req, res) => {
-    const song: string | undefined = queueHistory.pop();
+    const song: object | undefined = queueHistory.pop();
     if (!song) {
         res.status(400).send("No songs in history");
         return;
