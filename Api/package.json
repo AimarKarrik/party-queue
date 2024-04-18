@@ -9,8 +9,8 @@
   "author": "Aimar Karrik",
   "license": "ISC",
   "dependencies": {
-    "@spotify/web-api-ts-sdk": "^1.2.0",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "youtube-search-api": "^1.2.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
