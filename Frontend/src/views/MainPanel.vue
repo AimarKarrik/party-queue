@@ -29,7 +29,6 @@ export default {
     },
     methods: {
         async getQueue() {
-            console.log('Getting queue')
             try {
                 const response = await fetch(`${import.meta.env.VITE_API_URL}/queue`)
                 if (!response.ok) {

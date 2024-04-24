@@ -25,7 +25,7 @@ queueController.delete('/', async (req, res) => {
     const song: Song = req.body;
 
     if (!queue.includes(song)) {
-        res.status(400).send("Song not in queue");
+        res.status(404).send("Song not in queue");
         return;
     }
 
@@ -39,7 +39,7 @@ queueController.put('/', async (req, res) => {
     const newPosition: number = parseInt(req.query.newPosition as string);
 
     if (!queue.includes(song)) {
-        res.status(400).send("Song not in queue");
+        res.status(404).send("Song not in queue");
         return;
     }
 
@@ -57,7 +57,7 @@ queueController.put('/', async (req, res) => {
 queueController.get('/next', async (req, res) => {
     const song: Song | undefined = queue.shift();
     if (!song) {
-        res.status(400).send("No songs in queue");
+        res.status(404).send("No songs in queue");
         return;
     }
     queueHistory.push(song);
@@ -68,7 +68,7 @@ queueController.get('/next', async (req, res) => {
 queueController.get('/previous', async (req, res) => {
     const song: Song | undefined = queueHistory.pop();
     if (!song) {
-        res.status(400).send("No songs in history");
+        res.status(404).send("No songs in history");
         return;
     }
     queue.unshift(song);
