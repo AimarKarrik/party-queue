@@ -12,18 +12,22 @@ body {
 
 p {
     font-size: 1rem;
+    margin: 0;
 }
 
 h1 {
     font-size: 2.986rem;
+    margin: 0;
 }
 
 h2 {
     font-size: 2.488rem;
+    margin: 0;
 }
 
 h3 {
     font-size: 2.074rem;
+    margin: 0;
 }
 
 input {
@@ -35,9 +39,7 @@ input {
     background-color: #2e2e38;
     border: none;
     height: 3rem;
-    width: 100%;
-
-    padding: 0 1rem;
+    /* padding: 0 1rem; */
 }
 input:focus {
     outline: #b85750 solid 0.2rem;
@@ -66,4 +68,27 @@ button:hover {
 }
 button:active {
     background-color: #4e4e58;
+}
+
+/* Phone */
+@media (max-width: 800px) {
+    h1 {
+        font-size: 2.488rem;
+    }
+
+    h2 {
+        font-size: 2.074rem;
+    }
+
+    h3 {
+        font-size: 1.728rem;
+    }
+
+    input {
+        font-size: 1rem;
+    }
+
+    button {
+        font-size: 1rem;
+    }
 }

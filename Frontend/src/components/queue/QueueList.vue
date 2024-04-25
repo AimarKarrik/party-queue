@@ -4,8 +4,8 @@ import SongItem from '@/components/songs/SongItem.vue'
 
 <template>
     <div class="queue-list">
-        <h2>Queue List</h2>
-        <div v-if="queue">
+        <h2>Next in queue</h2>
+        <div v-if="queue" class="queue">
             <SongItem
                 v-for="song in queue"
                 :key="song.id"
@@ -20,18 +20,14 @@ import SongItem from '@/components/songs/SongItem.vue'
 </template>
 
 <script lang="ts">
-import type { PropType } from 'vue'
+import { ref } from 'vue'
 import type Song from '@/types/song'
 
 export default {
-    props: {
-        queue: {
-            type: Array as PropType<Song[]>
-        }
-    },
     data() {
         return {
-            hasQueue: false
+            hasQueue: false,
+            queue: ref<Song[]>([])
         }
     },
     updated() {
@@ -39,10 +35,45 @@ export default {
             return
         }
         this.hasQueue = this.queue.length > 0
+    },
+    created() {
+        this.getQueue()
+    },
+    mounted() {
+        setInterval(this.getQueue, 5000)
+    },
+    methods: {
+        async getQueue() {
+            console.log('Getting queue')
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/queue`)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok')
+                }
+                const responseData: Song[] = await response.json()
+
+                this.queue.splice(0, this.queue.length)
+                this.queue.push(...responseData)
+            } catch (error) {
+                console.error('Error getting queue:', error)
+            }
+        }
     }
 }
 </script>
 
 <style scoped>
-/* Add your component-specific styles here */
+.queue-list {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+.queue-list h2 {
+    margin-bottom: 1rem;
+}
+.queue {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 </style>
