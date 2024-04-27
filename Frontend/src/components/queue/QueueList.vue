@@ -20,10 +20,17 @@ import SongItem from '@/components/songs/SongItem.vue'
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
+import { ref, type PropType } from 'vue'
 import type Song from '@/types/song'
 
 export default {
+    props: {
+        isAdmin: {
+            type: Boolean as PropType<boolean>,
+            required: false,
+            default: false
+        }
+    },
     data() {
         return {
             hasQueue: false,
@@ -44,7 +51,6 @@ export default {
     },
     methods: {
         async getQueue() {
-            console.log('Getting queue')
             try {
                 const response = await fetch(`${import.meta.env.VITE_API_URL}/queue`)
                 if (!response.ok) {

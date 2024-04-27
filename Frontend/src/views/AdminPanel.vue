@@ -1,6 +1,6 @@
 <template>
     <YoutubePlayer />
-    <QueueList />
+    <QueueList :isAdmin="true" />
 </template>
 
 <script lang="ts">

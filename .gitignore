@@ -30,4 +30,4 @@ api/build
 
 *.tsbuildinfo
 # config files
-src/config/config.json
+*.env

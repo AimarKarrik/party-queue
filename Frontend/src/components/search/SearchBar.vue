@@ -4,18 +4,31 @@ import SongItem from '@/components/songs/SongItem.vue'
 </script>
 
 <template>
-    <input type="text" placeholder="Search" v-model="searchQuery" @keypress="handleKeypress" />
-    <button @click="search">Search</button>
-    <div v-if="lastSearch.length > 0">
-        <SongItem
-            v-for="song in lastSearch"
-            :key="song.id"
-            :title="song.title"
-            :channel="song.channelTitle"
-            :length="song.length.simpleText"
-            :thumbnail="song.thumbnail.thumbnails[0].url"
-            @click="addToQueue(song)"
-        />
+    <div class="search">
+        <div class="search-bar">
+            <input
+                type="text"
+                placeholder="Search"
+                v-model="searchQuery"
+                @keypress="handleKeypress"
+                class="search-box"
+            />
+            <button @click="search" class="search-button">
+                <img src="@/assets/icons/search_FILL0_wght400_GRAD0_opsz24.svg" />
+            </button>
+        </div>
+        <div v-if="lastSearch.length > 0" class="search-results">
+            <SongItem
+                v-for="song in lastSearch"
+                :key="song.id"
+                :title="song.title"
+                :channel="song.channelTitle"
+                :length="song.length.simpleText"
+                :thumbnail="song.thumbnail.thumbnails[0].url"
+                @click="addToQueue(song)"
+                class="search-result"
+            />
+        </div>
     </div>
 </template>
 
@@ -69,3 +82,58 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 1rem 1rem;
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    margin-bottom: 1rem;
+    background-color: #2e2e38;
+    border-radius: 1rem;
+}
+.search-box {
+    width: 100%;
+    padding: 0 1rem;
+    font-size: 1rem;
+    border-radius: 1rem 0 0 1rem;
+}
+.search-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 1rem 1rem 0;
+}
+.search-button:focus {
+    outline: none;
+}
+.search-button:hover {
+    background-color: #4e4e58;
+}
+.search-button:active {
+    background-color: #3e3e48;
+}
+
+.search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    height: 52vh;
+    overflow-y: scroll;
+    border-radius: 1rem;
+}
+.search-result {
+    cursor: pointer;
+}
+.search-result:hover {
+    background-color: #4e4e58;
+}
+</style>

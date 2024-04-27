@@ -42,10 +42,11 @@ input {
     /* padding: 0 1rem; */
 }
 input:focus {
-    outline: #b85750 solid 0.2rem;
+    outline: none;
+    background-color: #2e2e38;
 }
 input:hover {
-    background-color: #3e3e48;
+    background-color: #4e4e58;
 }
 
 button {
@@ -60,18 +61,16 @@ button {
 
     padding: 0 1rem;
 }
-button:focus {
-    outline: #b85750 solid 0.2rem;
-}
+
 button:hover {
-    background-color: #3e3e48;
+    background-color: #4e4e58;
 }
 button:active {
-    background-color: #4e4e58;
+    background-color: #3e3e48;
 }
 
 /* Phone */
-@media (max-width: 800px) {
+@media screen and (max-width: 800px) {
     h1 {
         font-size: 2.488rem;
     }
@@ -82,6 +81,27 @@ button:active {
 
     h3 {
         font-size: 1.728rem;
+    }
+
+    input {
+        font-size: 1rem;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+}
+@media screen and (max-width: 400px) {
+    h1 {
+        font-size: 2.074rem;
+    }
+
+    h2 {
+        font-size: 1.728rem;
+    }
+
+    h3 {
+        font-size: 1.44rem;
     }
 
     input {
