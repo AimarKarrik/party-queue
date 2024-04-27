@@ -1,25 +1,28 @@
 #!/bin/bash
+echo "Installing npm dependencies for API..."
+cd ./api || { echo "Error: Directory ./api not found."; exit 1; }
+npm install
 
-# Define directories
-dir1="./Api"
-dir2="./Client"
+if [ $? -ne 0 ]; then
+    echo "Error: npm install failed for API."
+    read -p "Press Enter to continue..."
+    exit 1
+fi
+echo "npm install completed successfully for Api"
+cd ..
 
-# Function to run npm install and check for errors
-run_npm_install() {
-    echo "Installing npm dependencies for $1..."
-    cd "$1" || { echo "Error: Directory $1 not found."; exit 1; }
-    npm install
-    if [ $? -ne 0 ]; then
-        echo "Error: npm install failed for $1."
-        exit 1
-    fi
-    echo "npm install completed successfully for $1."
-}
 
-# Run npm install for directory 1
-run_npm_install "$dir1"
+echo "Installing npm dependencies for Client..."
+cd ./client || { echo "Error: Directory Client not found."; exit 1; }
+npm install
 
-# Run npm install for directory 2
-run_npm_install "$dir2"
+if [ $? -ne 0 ]; then
+    echo "Error: npm install failed for Client."
+    read -p "Press Enter to continue..."
+    exit 1
+fi
+echo "npm install completed successfully for Client."
+cd ..
 
 echo "npm install completed successfully for both directories."
+read -p "Press Enter to continue..."
