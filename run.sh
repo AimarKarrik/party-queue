@@ -1,0 +1,1 @@
+( cd ./api && npm run start ) & ( cd ./client && npm run serve )
